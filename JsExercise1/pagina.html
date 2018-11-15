@@ -4,19 +4,23 @@
     <title>Exercise 1</title>
     <style>
         #canvas {
-            border: 1px solid red;
+            border: 3px solid #000000;
         }
     </style>
 </head>
 
 <body>
 
-
-    <h4>Drag 1 or more shapes.</h4>
-    <canvas id="canvas" width=300 height=300></canvas>
+    <span style="color: #000000">Please move circles from lower right</span>
+    <canvas id="canvas" width=600 height=500></canvas>
 
 
     <script>
+        var blueSquareCircleColor = '#0033FF';
+        var redSquareCircleColor = '#FF0000';
+        var squareSize = 200;
+        var circleRadius = 40;
+
         // get canvas related references
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
@@ -40,25 +44,34 @@
         rects.push({
             x: 75,
             y: 50,
-            width: 50,
-            height: 50,
-            fill: "#000000",
+            width: squareSize,
+            height: squareSize,
+            fill: blueSquareCircleColor, 
             isDragging: false
         });
         rects.push({
-            x: 175,
+            x: 375,
             y: 50,
-            width: 50,
-            height: 50,
-            fill: "#ff550d",
+            width: squareSize,
+            height: squareSize,
+            fill: redSquareCircleColor,
             isDragging: false
         });
 
         circles.push({
             x: 75,
-            y: 120,
-            radius: 15,
-            fill: "#000000",
+            y: 320,
+            radius: circleRadius,
+            fill: blueSquareCircleColor, 
+            isDragging: false,
+            isDisabled : false
+        });
+
+        circles.push({
+            x: 175,
+            y: 320,
+            radius: circleRadius,
+            fill: redSquareCircleColor,
             isDragging: false,
             isDisabled : false
         });
@@ -84,6 +97,12 @@
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
             ctx.closePath();
             ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(x, y, radius-2, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.fill();
         }
 
         // clear the canvas
@@ -94,7 +113,7 @@
         // redraw the scene
         function draw() {
             clear();
-            ctx.fillStyle = "yellow";
+            ctx.fillStyle = "#FFFFFF";
             rect(0, 0, WIDTH, HEIGHT);
             // redraw each rect in the rects[] array
             for (var i = 0; i < rects.length; i++) {
@@ -125,14 +144,7 @@
 
             // test each rect to see if mouse is inside
             dragok = false;
-            for (var i = 0; i < rects.length; i++) {
-                var r = rects[i];
-                if (mx > r.x && mx < r.x + r.width && my > r.y && my < r.y + r.height) {
-                    // if yes, set that rects isDragging=true
-                    dragok = true;
-                    r.isDragging = true;
-                }
-            }
+         
             for (var i = 0; i < circles.length; i++) {
                 var c = circles[i];
                 if (mx > c.x && mx < c.x + c.radius && my > c.y && my < c.y + c.radius) {
@@ -157,7 +169,16 @@
                             // inside
                             console.log('CIRCLE IS INSIDE');
                             // should block the circle permanently
+
+                            // we can compute where the center of the current rectangle is,
+                            // in order to place the circle
+                            // in order to compute the center, we need to comptute relative 
+                            // according to the current enclosing rectangle
+                            circle.x = rectangle.x + rectangle.width / 2;
+                            circle.y = rectangle.y + rectangle.height / 2;
+
                             circle.isDisabled = true;
+                            draw();
                         }
                     }
                 }
