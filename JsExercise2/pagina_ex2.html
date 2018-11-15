@@ -1,0 +1,164 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<head>
+</head>
+<body>
+    <div>
+        Select A type <select id="A">
+        </select>
+    </div>
+    <div>
+        Select B type <select id="B">
+        </select>
+    </div>
+    <div>
+        Select C type
+        <select id="C">
+        </select>
+    </div>
+    <br />
+    <div id="optiuniPosibile">
+    </div>
+
+    <hr>
+    <script>
+
+        // functie pentru scoaterea duplicatelor dintr-un array
+        // detalii: https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array
+        function _removeDuplicates(optiuni) {
+
+            var uniqueOptions = [];
+            $.each(optiuni, function (i, el) {
+                if ($.inArray(el, uniqueOptions) === -1) uniqueOptions.push(el);
+            });
+            return uniqueOptions;
+        }
+
+        // functie folosita pentru generarea HTML-ului cu optiunile pentru un anumit select
+        function _generareOptiuniSelect(id, optiuni) {
+            var optiuniUnice = _removeDuplicates(optiuni);
+
+            var optiuniStr = "<option>Toate</option>";
+            for (var i = 0; i < optiuniUnice.length; i++) {
+                optiuniStr += "<option>" + optiuniUnice[i] + "</option>";
+            }
+            console.log('setam');
+            $(id).html(optiuniStr);
+        }
+
+        // functie ce centralizeaza si genereaza HTML-ul pentru toate cele 3 select-uri
+        function generareOptiuni(optiuniValide) {
+            var optiuniA = [];
+            var optiuniB = [];
+            var optiuniC = [];
+
+
+            var continutDivPrezentare = "";
+            for (var i = 0; i < optiuniValide.length; i++) {
+                optiuniA.push(optiuniValide[i][0]);
+                optiuniB.push(optiuniValide[i][1]);
+                optiuniC.push(optiuniValide[i][2]);
+                continutDivPrezentare += "<div>" + optiuniValide[i][0];
+                continutDivPrezentare += "," + optiuniValide[i][1];
+                continutDivPrezentare += "," + optiuniValide[i][2] + "</div>";
+            }
+
+            $('#optiuniPosibile').html(continutDivPrezentare);
+
+            _generareOptiuniSelect('#A', optiuniA);
+            _generareOptiuniSelect('#B', optiuniB);
+            _generareOptiuniSelect('#C', optiuniC);
+
+        }
+
+
+        var selectieCurenta = [null, null, null]; // valorile curent selectate de user
+        var tuplurileAll = []; // toate valorile posibile incarcate din fisierul db/testData.txt
+
+
+        $('#A').change(function () {
+            console.log('valoare selectie: ', $(this).val());
+            selectieCurenta[0] = $(this).val();
+            optiuni = getValidOptions(selectieCurenta, tuplurileAll);
+            console.log('optiuni valide: ', optiuni);
+            generareOptiuni(optiuni);
+        });
+
+        $('#B').change(function () {
+            console.log('valoare selectie: ', $(this).val());
+            selectieCurenta[1] = $(this).val();
+            optiuni = getValidOptions(selectieCurenta, tuplurileAll);
+            console.log('optiuni valide: ', optiuni);
+            generareOptiuni(optiuni);
+        });
+
+        $('#C').change(function () {
+            console.log('valoare selectie: ', $(this).val());
+            selectieCurenta[2] = $(this).val();
+            optiuni = getValidOptions(selectieCurenta, tuplurileAll);
+            console.log('optiuni valide: ', optiuni);
+            generareOptiuni(optiuni);
+        });
+        // selectie este un parametru de genul ['A1', null, null]
+        // sau [null, 'B2', null]
+        // sau ['A1', 'B2', null]
+        function getValidOptions(selectie, tuplurile) {
+            var optiuniValide = [];
+            for (var i = 0; i < tuplurile.length; i++) {
+                // console.log('iteratie curenta: ', tuplurile[i]);
+                var toateValide = true;
+                for (var j = 0; j < selectie.length; j++) {
+
+                    if (selectie[j] == null) {
+                        // nimic selectat, skip
+                    } else {
+                        // var string1 = new String(selectie[j]).valueOf().trim();
+                        // var string2 = new String(tuplurile[i][j]).valueOf().trim();
+                        var string1 = selectie[j].trim();
+                        var string2 = tuplurile[i][j].trim();
+
+                        if (string1 !== string2) {
+                            // console.log(selectie[j] + ' este diferit de ' + tuplurile[i][j]);
+                            toateValide = false;
+                        }
+                    }
+                }
+                if (toateValide) {
+                    optiuniValide.push(tuplurile[i]);
+                }
+            }
+            // console.log(optiuniValide);
+            return optiuniValide;
+        }
+
+        // functie ce incarca datele din fisierul db/testData.txt
+        // si construieste array-urile folosite ulterior pentru generarea
+        // optiunilor select-urilor
+        function incarcareBazaDate() {
+            $.ajax({
+                url: 'db/testData.txt',
+                success: function (datele) {
+                    console.log('am incarcat datele: ');
+                    var liniile = datele.split("\n");
+                    var tuplurile = [];
+                    console.log(liniile);
+                    console.log(liniile.length);
+
+                    for (var i = 0; i < liniile.length; i++) {
+                        var tuplu = liniile[i].split(",");
+                        tuplurile.push(tuplu);
+                        console.log("TUPLU: ", tuplu);
+                    }
+
+                    tuplurileAll = tuplurile;
+                    console.log('------------------------------');
+                    generareOptiuni(tuplurileAll);
+                }
+            });
+        }
+
+        incarcareBazaDate();  // apelul "principal" pentru a porni incarcarea datelor
+    </script>
+
+</body>
+</html>
