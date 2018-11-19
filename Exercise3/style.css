@@ -1,0 +1,336 @@
+
+
+.hero-words-wrap {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    z-index: 999;
+    position: relative;
+}
+.hero-words {
+    top: 690px;
+    margin: 10% 0 0 0;
+    background: rgba(37,191,236,0.7);
+    width: 49%;
+    padding: 3% 3% 0 3%;
+    border-radius: 60px 0!important;
+    -webkit-border-radius: 60px 0;
+    -moz-border-radius: 60px 0;
+    -o-border-radius: 60px 0;
+}
+.hero-words h3 {
+    color: #fff;
+    font-size: 45px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 40px;
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+.hero-words p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+    padding: 10px 0 30px 0;
+}
+.hero-words .button {
+    background: none;
+    border: 2px solid #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    font-style: normal;
+    font-size: 18px;
+    border-radius: 20px 0;
+    -webkit-border-radius: 20px 0;
+    -moz-border-radius: 20px 0;
+    -o-border-radius: 20px 0;
+}
+
+
+/*** MENIU ***/
+
+
+.menu-wrap {
+    clear: both;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.menu {
+    list-style: none;
+    margin: 0px;
+    padding: 0;
+    width: auto;
+    clear: both;
+    overflow: hidden;
+    float: right;
+}
+.menu li {
+    float: left;
+    margin: 0;
+    padding: 10px 0 0 0;
+    list-style: none;
+    background: none;
+    text-align: center;
+    width: auto;
+    display: block;
+}
+
+.menu li a, .menu li a:link, .menu li a:visited {
+    color: #949494;
+    display: block;
+    font-size:14px;
+    font-family: 'Maven Pro', sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    text-decoration:none;
+    margin: 0px 0 0 0;
+    padding: 10px 13px;
+    text-transform: uppercase;
+    background: url(images/menu-div.png) no-repeat center right;
+}
+.menu li:first-child a {
+    padding-left: 0px!important;
+}
+.menu li:last-child a {
+    background: none!important;
+}
+.menu li.current_page_item a, .menu li.current-menu-item a {
+    color: #00bae9;
+    font-weight: 700;	
+}
+
+/*** SUB-MENIU ***/
+
+.menu li ul {
+    z-index: 999999;
+    position: absolute;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    left: -999em;
+    border-bottom: 2px solid #2d2d2d;
+    min-width: 150px;
+    *width: 225px;
+    *margin: 0 0 0 -62px;
+}
+.menu li li,
+.menu li.current_page_item li, .menu li.current-menu-item li {
+    float: none!important;
+    padding:0;
+    margin: 0!important;
+    background: none!important;
+    text-align: left;
+    width: 100%;
+}
+.menu li li a,
+.menu li.current_page_item li a, .menu li.current-menu-item li a {
+    padding: 5px 10px 5px 10px!important;
+    text-transform: none!important;
+    color: #fff!important;
+    margin: 0!important;
+    background: none!important;
+    border-bottom: 1px solid #2d2d2d;
+}
+.menu li li a:hover, .menu li li.current_page_item a, .menu li li.current-menu-item a {
+    background: #1d1d1d!important;
+    border-bottom: 1px solid #f23357!important;
+}
+.menu li:hover ul ul, .menu li:hover ul ul ul, .menu li.sfhover ul ul, .menu li.sfhover ul ul ul {
+    left: -999em;
+}
+.menu li:hover ul, .menu li li:hover ul, .menu li li li:hover ul, .menu li.sfhover ul, .menu li li.sfhover ul, .menu li li li.sfhover ul {
+    left: auto;
+}
+.menu li:hover, .menu li.sfhover {
+    position: static;
+}
+
+
+
+.right {
+    width: 70%;
+    float: right;
+}
+.right .top-left {
+    width: 93%;
+    float: left;
+}
+.right .top-left .info {
+    background: #efefef;
+    clear: both;
+    overflow: hidden;
+    width: 66%;
+    margin: 0 1% 0 0;
+    float: right;
+    border-radius: 0 0 100px 100px;
+    -moz-border-radius: 0 0 100px 100px;
+    -webkit-border-radius: 0 0 100px 100px;
+    -o-border-radius: 0 0 100px 100px;
+}
+
+
+.info .quote {
+    background: #00bae9;
+    width: 44%;
+    clear: none;
+    overflow: inherit;
+    padding: 1.5% 4% 2.5% 7%;
+    float: right;
+    border-radius: 0 0 100px 100px;
+    -moz-border-radius: 0 0 100px 100px;
+    -webkit-border-radius: 0 0 100px 100px;
+    -o-border-radius: 0 0 100px 100px;
+}
+.info .quote h2 {
+    color: #fff;
+    font-size: 17px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    line-height: 22px;
+}
+.info .quote h2 a {
+    color: #fff;
+    text-decoration: none;
+    font-style: normal;
+    padding: 0 15px 0 0;
+}
+
+
+.info .phone {
+    width: 39%;
+    float: left;
+    padding: 1.5% 3% 2.5% 3%;
+}
+.info .phone h2 {
+    font-size: 21px;
+    color: #737373;
+    margin: 0 0 0 10px;
+    padding: 0 0 0 25px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.details-point {
+    padding-top: 1em;
+    text-decoration: none;
+    color: #25bfec;
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+
+.commitment{
+    text-align: center;
+    font-family: 'Maven Pro', sans-serif;
+    color: #848484;
+}
+
+
+.clients h4 {
+    width: 35%;
+    padding: 1% 2%;
+    background: #00bae9;
+    top: 0;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: right;
+    left: 0;
+    font-size: 30px;
+    font-weight: 300;
+    border-radius: 0 0 50px 0;
+    -webkit-border-radius: 0 0 50px 0;
+    -moz-border-radius: 0 0 50px 0;
+    -o-border-radius: 0 0 50px 0;
+}
+
+
+.clients{
+    margin-top: 15px;
+}
+
+
+.quote-bottom {
+    padding: 0px 0 5px 0;
+    background: url(images/quote-2.png) no-repeat right bottom;
+}
+
+.quote-before::before{
+    content: "";
+    background: url('images/quotes-left.png');
+    height: 14px; 
+    width: 18px;  
+    position: absolute;
+}
+.quotebox::after{
+    content: "";
+  
+    background: url('images/quotes-right.png');
+    height: 14px; 
+    width: 18px;  
+    position: absolute;
+    right: 0px;
+
+}
+.quotebox-container{
+    padding: 15px 0 0px 20px;
+    /* float: right; */
+}
+
+div.client-details img{
+   
+    height: 40px;
+    width: 40px;
+}
+
+div.client-details{
+    padding-top: 20px;
+}
+
+.client-name{
+    color: #707070;
+}
+.client-separator{
+    color: #707070;
+}
+
+.client-description{
+    color: #707070;
+}
+
+
+.speech-bubble {
+	position: relative;
+	background: #D4D4D4;
+	border-radius: .4em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 28px solid transparent;
+	border-top-color: #D4D4D4;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -124px;
+	margin-bottom: -28px;
+}
+
+.quote-row{
+    padding-bottom: 40px;
+}
+
+.quote-last-row{
+    padding-bottom: 40px;
+    border-top: 1px solid rgb(182, 182, 182);
+}
